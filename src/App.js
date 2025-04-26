@@ -23,22 +23,15 @@ export function App() {
 
 const Main = styled.main`
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 30px;
-  padding: 20px 0;
-  max-width: 80%;
+  padding: 20px 50px;
+  max-width: 1520px;
   margin: 0 auto;
 
-  @media (max-width: 1200px) {
-    max-width: 95%;
-  }
-
-  @media (max-width: 930px) {
-    max-width: 85%;
-  }
-
-  @media (max-width: 600px) {
-    max-width: 90%;
+  @media (max-width: 1050px) {
+    padding: 20px 20px;
   }
 `;

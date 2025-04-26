@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Popup } from './popup';
 import { useData } from './providers';
 import { Card } from './card';
+import { useEffect } from 'react';
 
 const defaultPopupSettings = {
   visible: false,
@@ -14,11 +15,25 @@ export function ItemsGrid() {
   const [popupSettings, setPopupSettings] = useState(defaultPopupSettings);
 
   function cardOnClickHandler(props) {
-    setPopupSettings({
-      visible: true,
-      content: { ...props }
-    });
+    setPopupSettings({ visible: true, content: { ...props } });
   }
+
+  // Убираем скроллинг при открытом Popup
+  useEffect(() => {
+    // Получаем ширину скроллбара для компенсации(убираем резкое смещение экрана)
+    const scrollBarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+
+    if (popupSettings.visible) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.paddingRight = `${scrollBarWidth}px`; // Компенсируем ширину скроллбара
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    };
+  }, [popupSettings.visible]);
 
   if (!characters.length) {
     return null;
@@ -26,11 +41,11 @@ export function ItemsGrid() {
 
   return (
     <Container>
-      {characters.map((props, index) => (
+      {characters.map((character) => (
         <Card
-          key={index}
-          onClickHandler={() => cardOnClickHandler(props)}
-          {...props}
+          key={character.id}
+          onClickHandler={() => cardOnClickHandler(character)}
+          {...character}
         />
       ))}
 

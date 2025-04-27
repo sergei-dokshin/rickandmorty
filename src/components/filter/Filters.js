@@ -1,27 +1,32 @@
 import styled from 'styled-components';
 import { Select } from './Select';
-
-const options = [
-  'option 1',
-  'option 2',
-  'option 3',
-  'option 4',
-  'option 5',
-  'option 6',
-  'option 7',
-  'option 8',
-  'option 9',
-  'option 10'
-];
+import { useSelectOptions } from '../../hooks/useSelectOptions';
 
 export function Filters() {
+  const { options, isFetching, isError } = useSelectOptions();
+
   return (
     <FilterContainer>
-      <Select name="Status" options={options} gridArea="status" />
+      <Select
+        name="Status"
+        options={options.status}
+        gridArea="status"
+        isFetching={isFetching}
+      />
 
-      <Select name="Gender" options={options} gridArea="gender" />
+      <Select
+        name="Gender"
+        options={options.gender}
+        gridArea="gender"
+        isFetching={isFetching}
+      />
 
-      <Select name="Species" options={options} gridArea="species" />
+      <Select
+        name="Species"
+        options={options.species}
+        gridArea="species"
+        isFetching={isFetching}
+      />
 
       <InputStyled style={{ gridArea: 'name' }} placeholder="Name" />
       <InputStyled style={{ gridArea: 'type' }} placeholder="Type" />

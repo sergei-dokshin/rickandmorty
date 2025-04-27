@@ -16,7 +16,7 @@ export function DataProvider({ children }) {
   const [isFetching, setIsFetching] = useState(false);
   const [isError, setIsError] = useState(false);
   const [info, setInfo] = useState({});
-  const [apiURL, setApiURL] = useState(API_URL);
+  const [apiURL, setApiURL] = useState(`${API_URL}?page=1`);
 
   const fetchData = useCallback(async (url) => {
     setIsFetching(true);

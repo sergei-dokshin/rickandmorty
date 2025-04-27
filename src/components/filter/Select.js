@@ -5,7 +5,7 @@ import ChevronUp from '../../assets/select-icons/chevron-up.svg';
 import CrossIcon from '../../assets/select-icons/cross-Icon.svg';
 import { useCloseSelect } from '../../hooks/useCloseSelect';
 
-export function Select({ name, options }) {
+export function Select({ name, options, isFetching }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState('');
   const [hoverIndex, setHoverIndex] = useState(null);
@@ -55,9 +55,14 @@ export function Select({ name, options }) {
         onClick={() => setIsOpen((prev) => !prev)}
         ref={selectRef}
         gridArea={name.toLowerCase()}
+        $disabled={isFetching}
       >
-        <SelectedValue>{selectedValue || name}</SelectedValue>
-        <Icon src={getIcon()} alt="Toggle" onClick={handleIconClick} />
+        <SelectedValue $isDefault={!selectedValue}>
+          {selectedValue || name}
+        </SelectedValue>
+        {!isFetching && (
+          <Icon src={getIcon()} alt="Toggle" onClick={handleIconClick} />
+        )}
       </SelectStyled>
 
       {isOpen && (
@@ -101,10 +106,30 @@ const SelectStyled = styled.div`
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+
+  cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
+  pointer-events: ${({ $disabled }) => ($disabled ? 'none' : 'auto')};
+
+  animation: ${({ $disabled }) =>
+    $disabled ? 'blink 1.5s ease-in-out infinite' : 'none'};
+
+  @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `;
 
 const SelectedValue = styled.span`
   font-size: 16px;
+
+  color: ${({ $isDefault }) => ($isDefault ? '#B3B3B3' : '#ffffff')};
 `;
 
 const Icon = styled.img`
@@ -133,22 +158,24 @@ const Dropdown = styled.div`
   overflow-y: auto;
   z-index: 10;
 
-  /* Убираем стрелки с полосы прокрутки */
+  /* Стили для бегунка полосы прокрутки */
   ::-webkit-scrollbar {
-    width: 4px; /* Ширина полосы прокрутки */
-  }
-
-  ::-webkit-scrollbar-button {
-    display: none; /* Убираем стрелки */
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: #d9d9d9; /* Цвет бегунка */
     width: 4px;
-    height: 80px;
+  }
+
+  /* Убираем стрелки */
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  /* Вид бегунка */
+  ::-webkit-scrollbar-thumb {
+    background-color: #d9d9d9;
+    width: 4px;
     border-radius: 8px;
   }
 
+  /* Отступы, чтобы бегунок не выходил за пределы скругленных углов контейнера */
   ::-webkit-scrollbar-track {
     margin-top: 8px;
     margin-bottom: 8px;

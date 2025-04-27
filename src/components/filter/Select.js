@@ -110,6 +110,12 @@ const SelectedValue = styled.span`
 const Icon = styled.img`
   width: 16px;
   height: 16px;
+
+  transition: fill 0.3s ease;
+
+  &:hover {
+    fill: #83bf46; /* Ваш акцентный цвет */
+  }
 `;
 
 const Dropdown = styled.div`
@@ -119,12 +125,34 @@ const Dropdown = styled.div`
 
   color: #1e1e1e;
   width: 100%;
+  height: 152px;
   border: 1px solid #83bf46;
   border-radius: 8px;
   background-color: #ffffff;
   max-height: 200px;
   overflow-y: auto;
   z-index: 10;
+
+  /* Убираем стрелки с полосы прокрутки */
+  ::-webkit-scrollbar {
+    width: 4px; /* Ширина полосы прокрутки */
+  }
+
+  ::-webkit-scrollbar-button {
+    display: none; /* Убираем стрелки */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #d9d9d9; /* Цвет бегунка */
+    width: 4px;
+    height: 80px;
+    border-radius: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
 `;
 
 const Option = styled.div`

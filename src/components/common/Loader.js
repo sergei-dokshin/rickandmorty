@@ -12,7 +12,7 @@ const spin = keyframes`
 
 export const Loader = styled.div`
   margin: auto;
-  background: url('/assets/loader.png') center no-repeat;
+  background: url('/assets/loader.svg') center no-repeat;
   background-size: cover;
   width: 200px;
   height: 200px;

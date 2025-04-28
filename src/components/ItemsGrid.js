@@ -50,6 +50,7 @@ const Container = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   justify-items: center;
   gap: 30px;
+  color: rgba(0, 0, 0, 0.3);
 
   width: 100%;
   padding-top: 20px;

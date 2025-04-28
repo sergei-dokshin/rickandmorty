@@ -18,9 +18,8 @@ export function FilterInput({ name, filters, setFilters }) {
 }
 
 const InputStyled = styled.input`
-  width: 180px;
   height: 40px;
-  padding: 12px;
+  padding: 12px 12px 12px 16px;
   color: white;
   font-size: 16px;
   font-weight: 400;
@@ -35,6 +34,18 @@ const InputStyled = styled.input`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @media (max-width: 1220px) {
+    width: 180px;
+  }
+
+  @media (max-width: 950px) {
+    width: 150px;
+  }
+
+  @media (max-width: 530px) {
+    width: 240px;
+  }
 
   &:hover {
     background-color: #334466;

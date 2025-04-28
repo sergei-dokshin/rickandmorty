@@ -78,44 +78,31 @@ const FilterContainer = styled.div`
   grid-template-areas:
     'status gender species species'
     'name type apply reset';
-  grid-template-columns: 180px 180px 85px 85px;
+  grid-template-columns: 240px 240px 115px 115px;
   grid-template-rows: 40px 40px;
   gap: 10px;
 
   font-family: 'Inter', sans-serif;
   color: #ffffff;
-`;
 
-const InputStyled = styled.input`
-  width: 180px;
-  height: 40px;
-  padding: 12px;
-  color: white;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: 0;
-  border: 1px solid #83bf46;
-  border-radius: 8px;
-  background-color: #263750;
-  transition: background-color 0.3s ease;
-  outline: none;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  &:hover {
-    background-color: #334466;
+  @media (max-width: 1220px) {
+    grid-template-columns: 180px 180px 85px 85px;
   }
 
-  &:focus {
-    background-color: #334466;
+  @media (max-width: 950px) {
+    grid-template-columns: 150px 150px 70px 70px;
+    gap: 15px;
+  }
+
+  @media (max-width: 530px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 `;
 
 const ApplyStyled = styled.button`
-  width: 85px;
+  width: 100%;
   height: 40px;
   color: #83bf46;
   font-size: 16px;
@@ -137,7 +124,7 @@ const ApplyStyled = styled.button`
 `;
 
 const ResetStyled = styled.button`
-  width: 85px;
+  width: 100%;
   height: 40px;
   color: #ff5152;
   font-size: 16px;

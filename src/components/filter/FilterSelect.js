@@ -5,14 +5,18 @@ import { SvgIcon } from './SvgIcon';
 import { DropdownMenu } from './DropdownMenu';
 import { capitalize } from 'lodash';
 import { useEffect } from 'react';
+import { useStopPageScroll } from '../../hooks/useStopPageScroll';
 
 export function FilterSelect({ name, options, filters, setFilters }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState('');
-  const containerRef = useRef(null); // для SelectWrapper
+  const containerRef = useRef(null);
   const capitalizedName = capitalize(name);
 
-  useCloseSelect(setIsOpen, containerRef); // Хук для закрытия выпадающего меню
+  // Закрываем выпадающее меню при клике вне
+  useCloseSelect(setIsOpen, containerRef);
+  // Убираем скроллинг при открытом Popup
+  useStopPageScroll(isOpen);
 
   // Обрабатываем выбор
   const handleSelect = (option) => {
@@ -47,7 +51,7 @@ export function FilterSelect({ name, options, filters, setFilters }) {
   }, [filters, name]);
 
   return (
-    <SelectWrapper ref={containerRef}>
+    <SelectWrapper ref={containerRef} $name={name}>
       <SelectStyled onClick={() => setIsOpen((prev) => !prev)} gridArea={name}>
         <SelectedValue $isDefault={!selectedValue}>
           {selectedValue || capitalizedName}
@@ -73,14 +77,13 @@ export function FilterSelect({ name, options, filters, setFilters }) {
 
 const SelectWrapper = styled.div`
   position: relative;
-  width: 180px;
   height: 40px;
 `;
 
 const SelectStyled = styled.div`
-  width: 100%;
+  width: 240px;
   height: 100%;
-  padding: 0 12px;
+  padding: 12px 12px 12px 16px;
   font-size: 16px;
   user-select: none;
   line-height: 40px;
@@ -93,6 +96,18 @@ const SelectStyled = styled.div`
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+
+  @media (max-width: 1220px) {
+    width: 180px;
+  }
+
+  @media (max-width: 950px) {
+    width: 150px;
+  }
+
+  @media (max-width: 530px) {
+    width: 240px;
+  }
 `;
 
 const SelectedValue = styled.span`

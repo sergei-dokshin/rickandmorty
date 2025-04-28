@@ -28,14 +28,25 @@ const Dropdown = styled.div`
   left: 0;
 
   color: #1e1e1e;
-  width: 100%;
-  height: 152px;
+  width: 240px;
+  max-height: 152px;
   border: 1px solid #83bf46;
   border-radius: 8px;
   background-color: #ffffff;
-  max-height: 200px;
   overflow-y: auto;
   z-index: 10;
+
+  @media (max-width: 1220px) {
+    width: 180px;
+  }
+
+  @media (max-width: 950px) {
+    width: 150px;
+  }
+
+  @media (max-width: 530px) {
+    width: 240px;
+  }
 
   /* Стили для бегунка полосы прокрутки */
   ::-webkit-scrollbar {

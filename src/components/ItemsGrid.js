@@ -22,7 +22,12 @@ export function ItemsGrid() {
   useStopPageScroll(popupSettings.visible);
 
   if (!characters.length) {
-    return <h3>Таких персонажей не найдено</h3>;
+    return (
+      <NotFound>
+        <h3>Таких персонажей не найдено 🤷‍♂️</h3>
+        <p>Попробуйте поменять настройки фильтра.</p>
+      </NotFound>
+    );
   }
 
   return (
@@ -46,4 +51,25 @@ const Container = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   justify-items: center;
   gap: 30px;
+`;
+
+const NotFound = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+
+  h3 {
+    color: #83bf46;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  p {
+    color: rgb(153, 24, 24);
+    margin-top: 0.5rem;
+    font-size: 85%;
+  }
 `;

@@ -4,7 +4,6 @@ import { Popup } from './popup';
 import { useData } from './providers';
 import { Card } from './card';
 import { useStopPageScroll } from '../hooks/useStopPageScroll';
-import { Portal } from './common/Portal';
 
 const defaultPopupSettings = {
   visible: false,
@@ -27,8 +26,6 @@ export function ItemsGrid() {
       <NotFound>
         <h3>Таких персонажей не найдено!</h3>
         <p>Попробуйте поменять настройки фильтра.</p>
-
-        <Portal />
       </NotFound>
     );
   }

@@ -4,6 +4,7 @@ import { Popup } from './popup';
 import { useData } from './providers';
 import { Card } from './card';
 import { useStopPageScroll } from '../hooks/useStopPageScroll';
+import { Portal } from './common/Portal';
 
 const defaultPopupSettings = {
   visible: false,
@@ -26,6 +27,8 @@ export function ItemsGrid() {
       <NotFound>
         <h3>Таких персонажей не найдено!</h3>
         <p>Попробуйте поменять настройки фильтра.</p>
+
+        <Portal />
       </NotFound>
     );
   }
@@ -46,11 +49,13 @@ export function ItemsGrid() {
 }
 
 const Container = styled.div`
-  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   justify-items: center;
   gap: 30px;
+
+  width: 100%;
+  padding-top: 20px;
 `;
 
 const NotFound = styled.div`
@@ -68,8 +73,9 @@ const NotFound = styled.div`
   }
 
   p {
-    color: rgb(153, 24, 24);
+    color: #ff5152;
     margin-top: 0.5rem;
     font-size: 85%;
+    text-align: center;
   }
 `;

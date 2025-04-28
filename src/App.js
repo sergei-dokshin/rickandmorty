@@ -22,12 +22,12 @@ export function App() {
 }
 
 const Main = styled.main`
-  height: 100%;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 30px;
-  padding: 20px 50px;
+  padding: 20px 50px 50px 50px;
   max-width: 1520px;
   margin: 0 auto;
 

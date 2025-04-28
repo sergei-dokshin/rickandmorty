@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { Logo } from './Logo';
-import { Filters } from '../filter/Filters';
+import { Filter } from '../filter/Filter';
 
 export function Header() {
   return (
     <HeaderContainer>
       <Logo />
-      <Filters />
+      <Filter />
     </HeaderContainer>
   );
 }

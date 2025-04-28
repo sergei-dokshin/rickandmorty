@@ -13,11 +13,13 @@ export function CardStatus({ status, species, type, className }) {
 
 const CardStatusContainer = styled.div`
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 `;
 
 const StyledCardStatus = styled.span`
   display: flex;
+
   align-items: center;
   text-transform: capitalize;
 

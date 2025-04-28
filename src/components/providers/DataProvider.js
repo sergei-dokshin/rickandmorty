@@ -8,7 +8,7 @@ import {
   useCallback
 } from 'react';
 
-const API_URL = 'https://rickandmortyapi.com/api/character/';
+const API_URL = 'https://rickandmortyapi.com/api/character';
 
 export function DataProvider({ children }) {
   const [activePage, setActivePage] = useState(0);
@@ -16,27 +16,51 @@ export function DataProvider({ children }) {
   const [isFetching, setIsFetching] = useState(false);
   const [isError, setIsError] = useState(false);
   const [info, setInfo] = useState({});
-  const [apiURL, setApiURL] = useState(`${API_URL}?page=1`);
+  const [apiURL, setApiURL] = useState('');
 
   const fetchData = useCallback(async (url) => {
     setIsFetching(true);
     setIsError(false);
 
-    axios
-      .get(url)
-      .then(({ data }) => {
-        setIsFetching(false);
-        setCharacters(data.results);
-        setInfo(data.info);
-      })
-      .catch((e) => {
-        setIsFetching(false);
+    try {
+      const { data } = await axios.get(url);
+      setCharacters(data.results);
+      setInfo(data.info);
+      setIsFetching(false);
+    } catch (error) {
+      setIsFetching(false);
+
+      if (axios.isAxiosError(error)) {
+        if (
+          error.response?.status === 404 &&
+          error.response?.data?.error === 'There is nothing here'
+        ) {
+          // Ничего не найдено — это не настоящая ошибка
+          setCharacters([]);
+          setInfo({});
+        } else {
+          setIsError(true);
+          console.error(error);
+        }
+      } else {
         setIsError(true);
-        console.error(e);
-      });
+        console.error(error);
+      }
+    }
   }, []);
 
   useEffect(() => {
+    const params = window.location.search;
+
+    if (params) {
+      setApiURL(`${API_URL}${params}`);
+    } else {
+      setApiURL(API_URL);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!apiURL) return;
     fetchData(apiURL);
   }, [apiURL, fetchData]);
 

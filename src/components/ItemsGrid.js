@@ -36,7 +36,7 @@ export function ItemsGrid() {
   }, [popupSettings.visible]);
 
   if (!characters.length) {
-    return null;
+    return <h3>Таких персонажей не найдено</h3>;
   }
 
   return (

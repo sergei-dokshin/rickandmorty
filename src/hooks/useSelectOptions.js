@@ -9,11 +9,23 @@ export function useSelectOptions() {
   const [options, setOptions] = useState({
     status: ['Alive', 'Dead', 'Unknown'],
     gender: ['Female', 'Male', 'Genderless', 'Unknown'],
-    species: []
+    species: [
+      'Human',
+      'Alien',
+      'Humanoid',
+      'Unknown',
+      'Poopybutthole',
+      'Mythological Creature',
+      'Animal',
+      'Robot',
+      'Cronenberg',
+      'Disease'
+    ]
   });
   const [isFetching, setIsFetching] = useState(false);
   const [isError, setIsError] = useState(false);
 
+  // Поочередно загружаем 42 страницы для получения всех возможных species
   useEffect(() => {
     const fetchSpecies = async () => {
       setIsFetching(true);
@@ -26,9 +38,7 @@ export function useSelectOptions() {
       try {
         // Постранично загружаем данные и получаем species, т.к. API не дает список всех персонажей сразу
         while (!finished) {
-          const { data } = await axios.get(
-            `https://rickandmortyapi.com/api/character?page=${page}`
-          );
+          const { data } = await axios.get(`${API_URL}?page=${page}`);
 
           data.results.forEach((character) => {
             allSpecies.add(capitalize(character.species));

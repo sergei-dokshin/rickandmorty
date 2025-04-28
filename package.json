@@ -1,5 +1,6 @@
 {
   "name": "elfsight-test-task",
+  "author": "Elfsight and Sergei Dokshin",
   "version": "1.0.0",
   "private": true,
   "scripts": {

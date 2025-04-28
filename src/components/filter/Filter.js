@@ -63,12 +63,10 @@ export function Filter() {
       <FilterInput name="name" filters={filters} setFilters={setFilters} />
       <FilterInput name="type" filters={filters} setFilters={setFilters} />
 
-      <ApplyStyled style={{ gridArea: 'apply' }} onClick={applyFilters}>
-        Apply
-      </ApplyStyled>
-      <ResetStyled style={{ gridArea: 'reset' }} onClick={resetFilters}>
-        Reset
-      </ResetStyled>
+      <ButonsContainer style={{ gridArea: 'buttons' }}>
+        <ApplyStyled onClick={applyFilters}>Apply</ApplyStyled>
+        <ResetStyled onClick={resetFilters}>Reset</ResetStyled>
+      </ButonsContainer>
     </FilterContainer>
   );
 }
@@ -76,21 +74,17 @@ export function Filter() {
 const FilterContainer = styled.div`
   display: grid;
   grid-template-areas:
-    'status gender species species'
-    'name type apply reset';
-  grid-template-columns: 240px 240px 115px 115px;
+    'status gender species'
+    'name type buttons';
+  grid-template-columns: 180px 180px 180px;
   grid-template-rows: 40px 40px;
   gap: 10px;
 
   font-family: 'Inter', sans-serif;
   color: #ffffff;
 
-  @media (max-width: 1220px) {
-    grid-template-columns: 180px 180px 85px 85px;
-  }
-
   @media (max-width: 950px) {
-    grid-template-columns: 150px 150px 70px 70px;
+    grid-template-columns: 150px 150px 150px;
     gap: 15px;
   }
 
@@ -98,6 +92,24 @@ const FilterContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+`;
+
+const ButonsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  height: 100%;
+  width: 100%;
+  padding: 0;
+
+  @media (max-width: 950px) {
+    width: 150px;
+  }
+
+  @media (max-width: 530px) {
+    width: 240px;
   }
 `;
 

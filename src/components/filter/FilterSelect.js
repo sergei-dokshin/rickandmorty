@@ -76,12 +76,13 @@ export function FilterSelect({ name, options, filters, setFilters }) {
 }
 
 const SelectWrapper = styled.div`
+  width: 100%;
   position: relative;
   height: 40px;
 `;
 
 const SelectStyled = styled.div`
-  width: 240px;
+  width: 100%;
   height: 100%;
   padding: 12px 12px 12px 16px;
   font-size: 16px;
@@ -96,18 +97,6 @@ const SelectStyled = styled.div`
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-
-  @media (max-width: 1220px) {
-    width: 180px;
-  }
-
-  @media (max-width: 950px) {
-    width: 150px;
-  }
-
-  @media (max-width: 530px) {
-    width: 240px;
-  }
 `;
 
 const SelectedValue = styled.span`

@@ -5,6 +5,7 @@ import { updateURL } from '../../utils/updateURL';
 import { useData } from '../providers/DataProvider';
 import { SELECT_OPTIONS } from '../constants/select-options';
 import { FilterInput } from './FilterInput';
+import { FilterButton } from './FilterButton';
 
 const API_URL = 'https://rickandmortyapi.com/api/character?';
 
@@ -64,8 +65,16 @@ export function Filter() {
       <FilterInput name="type" filters={filters} setFilters={setFilters} />
 
       <ButonsContainer style={{ gridArea: 'buttons' }}>
-        <ApplyStyled onClick={applyFilters}>Apply</ApplyStyled>
-        <ResetStyled onClick={resetFilters}>Reset</ResetStyled>
+        <FilterButton
+          name="apply"
+          accentColor="#83bf46"
+          handleClick={applyFilters}
+        />
+        <FilterButton
+          name="reset"
+          accentColor="#ff5152"
+          handleClick={resetFilters}
+        />
       </ButonsContainer>
     </FilterContainer>
   );
@@ -92,6 +101,8 @@ const FilterContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    width: 240px;
   }
 `;
 
@@ -104,55 +115,7 @@ const ButonsContainer = styled.div`
   width: 100%;
   padding: 0;
 
-  @media (max-width: 950px) {
-    width: 150px;
-  }
-
   @media (max-width: 530px) {
-    width: 240px;
-  }
-`;
-
-const ApplyStyled = styled.button`
-  width: 100%;
-  height: 40px;
-  color: #83bf46;
-  font-size: 16px;
-  line-height: 1;
-  letter-spacing: 0;
-
-  padding: 12px;
-  background-color: rgba(255, 255, 255, 0);
-  border: 1px solid #83bf46;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-
-  cursor: pointer;
-
-  &:hover {
-    color: #ffffff;
-    background-color: #83bf46;
-  }
-`;
-
-const ResetStyled = styled.button`
-  width: 100%;
-  height: 40px;
-  color: #ff5152;
-  font-size: 16px;
-  line-height: 1;
-  letter-spacing: 0;
-
-  padding: 12px;
-  background-color: rgba(255, 255, 255, 0);
-  border: 1px solid #ff5152;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-
-  cursor: pointer;
-
-  &:hover {
-    color: #ffffff;
-    background-color: #ff5152;
+    flex-direction: column;
   }
 `;
